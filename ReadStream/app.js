@@ -4,10 +4,12 @@ var fs = require('fs');
 
 var stream = fs.createReadStream("c:\\users\\vrh\\my documents\\BigFile.txt");
 
+var content = '';
+
 stream.on('data', function(data){
-	console.log('Received data: ' + data);
+	content += data;
 });
 
 stream.on('end', function(){
-	console.log('Reached EOF');
+	console.log('Retrieved file contents: ' + content);
 });
