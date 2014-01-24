@@ -2,6 +2,7 @@
 
 var MyEmitter = function(){
 	this.callbacks = {};
+	this.updateCount = 0;
 };
 
 MyEmitter.prototype.on = function(eventType, callback){
@@ -9,8 +10,14 @@ MyEmitter.prototype.on = function(eventType, callback){
 };
 
 MyEmitter.prototype.update = function(){
-	if(this.callbacks['updated']){
-		this.callbacks['updated']();
+	if (this.updateCount < 3){
+		if(this.callbacks['updated']){
+			this.callbacks['updated']();
+		}
+		this.updateCount++;
+		if(this.updateCount === 3 && this.callbacks['end']){
+			this.callbacks['end']();
+		}
 	}
 };
 
