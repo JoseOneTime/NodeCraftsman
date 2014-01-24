@@ -1,22 +1,20 @@
 'use strict';
 
+var util = require('util');
+var EventEmitter = require('events').EventEmitter;
+
 var MyEmitter = function(){
-	this.callbacks = {};
 	this.updateCount = 0;
 };
 
-MyEmitter.prototype.on = function(eventType, callback){
-	this.callbacks[eventType] = callback;
-};
+util.inherits(MyEmitter, EventEmitter);
 
 MyEmitter.prototype.update = function(){
 	if (this.updateCount < 3){
-		if(this.callbacks['updated']){
-			this.callbacks['updated']();
-		}
+		this.emit('update');
 		this.updateCount++;
-		if(this.updateCount === 3 && this.callbacks['end']){
-			this.callbacks['end']();
+		if(this.updateCount === 3){
+			this.emit('end');
 		}
 	}
 };

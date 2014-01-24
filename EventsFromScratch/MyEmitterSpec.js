@@ -8,7 +8,7 @@ describe('MyEmitter', function(){
 		var myEmitter = new MyEmitter();
 		var updatedEventWasFired = false;
 
-		myEmitter.on('updated', function(){
+		myEmitter.on('update', function(){
 			updatedEventWasFired = true;
 		});
 
