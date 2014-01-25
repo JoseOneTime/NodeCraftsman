@@ -8,29 +8,23 @@ var connection = mysql.createConnection({
 	password : 'bacarach'
 });
 
-connection.query('CREATE DATABASE node', function(err){
-	if (err) {
-		console.log('Could not create db "node".');
-	}
-});
-
 connection.query('USE node', function(err){
 	if (err){
 		console.log('Could not switch to db "node".');
 	}
 });
 
-connection.query('CREATE TABLE test ' +
+connection.query('CREATE TABLE passwords ' +
 	'(id INT(11) AUTO_INCREMENT, ' + 
-	' content VARCHAR(255), ' +
+	' password VARCHAR(255), ' +
 	' PRIMARY KEY(id))',
 	function(err){
 		if (err) {
-			console.log('Could not create table "test".');
+			console.log('Could not create table "passwords".');
 		}
 	}
 );
 
-connection.query('INSERT INTO test (content) VALUES ("Hello")');
-connection.query('INSERT INTO test (content) VALUES ("World")');
+connection.query('INSERT INTO passwords (password) VALUES ("secret")');
+connection.query('INSERT INTO passwords (password) VALUES ("dont_tell")');
 connection.end();
