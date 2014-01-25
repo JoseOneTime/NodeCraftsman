@@ -11,7 +11,11 @@ var connection = mysql.createConnection({
 connection.query(
 	'SELECT "foo" AS first_field, "bar" as second_field',
 	function(err, results, fields){
-		console.log(results);
+		if (err){
+			console.log(err);
+		} else {
+			console.log(results);
+		}
 		connection.end();
 	}
 );
